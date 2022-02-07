@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Series;
+use App\Models\Posts;
 
-class SeriesSeeder extends Seeder
+class PostsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class SeriesSeeder extends Seeder
      */
     public function run()
     {
-        factory(Series::class, 10) -> create();
+        factory(Posts::class, 20) -> create();
     }
 }

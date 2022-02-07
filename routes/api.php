@@ -24,12 +24,12 @@ Route::post('/logout', 'Auth\LoginController@logout');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
-Route::get('/tvseries', 'ApiController@getAllTvSeries');
+Route::get('/posts', 'ApiController@getAllPosts');
 
-Route::get('/tvseries/delete/{id}', 'ApiController@deleteTvSeries');
+Route::get('/posts/delete/{id}', 'ApiController@deletePost');
 
-Route::get('/tvseries/{id}', 'ApiController@getSingleTvSeries');
+Route::get('/posts/{id}', 'ApiController@getSinglePost');
 
-Route::post('/tvseries/store', 'ApiController@storeNewTvSeries');
+Route::post('/posts/store', 'ApiController@storeNewPost');
 
-Route::post('/tvseries/update/{id}', 'ApiController@updateTvSeries');
+Route::post('/posts/update/{id}', 'ApiController@updatePost');

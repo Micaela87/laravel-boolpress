@@ -12,11 +12,11 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import AllTvSeries from './components/AllTvSeries.vue';
-import SingleTvSeries from './components/SingleTvSeries.vue';
+import AllPosts from './components/AllPosts.vue';
+import SinglePost from './components/SinglePost.vue';
 import App from './components/App.vue';
-import AddNewSeries from './components/AddNewSeries.vue';
-import EditTvSeries from './components/EditTvSeries.vue';
+import AddNewPost from './components/AddNewPost.vue';
+import EditPost from './components/EditPost.vue';
 
 const routes = [
     {
@@ -25,23 +25,26 @@ const routes = [
         name: 'home'
     },
     {
-        path: '/tvseries',
-        component: AllTvSeries,
-        name: 'tvseries'
+        path: '/posts',
+        component: AllPosts,
+        name: 'posts'
+        // meta: {
+        //     requiresAuth: true
+        // }
     },
     {
-        path: '/tvseries/:id',
-        component: SingleTvSeries,
+        path: '/posts/:id',
+        component: SinglePost,
         name: 'show'
     },
     {
-        path: '/addtvseries',
-        component: AddNewSeries,
+        path: '/addpost',
+        component: AddNewPost,
         name: 'add'
     },
     {
-        path: '/edittvseries/:id',
-        component: EditTvSeries,
+        path: '/editpost/:id',
+        component: EditPost,
         name: 'edit'
     },
 ];

@@ -6,6 +6,8 @@
             <input type="text" name="title" v-model="title"><br>
             <label for="author">Autore</label><br>
             <input type="text" name="author" v-model="author"><br>
+            <label for="content">Content</label><br>
+            <textarea name="content" cols="30" rows="10" v-model="content"></textarea>
             <label for="release_date">Data di rilascio</label><br>
             <input type="date" name="release_date" v-model="releaseDate"><br>
             <label for="rating">Rating</label>
@@ -22,6 +24,7 @@
             return {
                 title: '',
                 author: '',
+                content: '',
                 releaseDate: '',
                 rating: ''
             }
@@ -32,12 +35,13 @@
                 let data = {
                     title: this.title,
                     author: this.author,
+                    content: this.content,
                     release_date: this.releaseDate,
                     rating: this.rating
                 }
                 try {
 
-                    let response = await fetch('http://localhost:8000/api/tvseries/store', {
+                    let response = await fetch('http://localhost:8000/api/posts/store', {
                         method: 'POST',
                         headers: {
                         'Content-Type': 'application/json'
@@ -46,7 +50,7 @@
                     });
 
                     if (response.ok) {
-                        this.$router.push({ name: 'tvseries' });
+                        this.$router.push({ name: 'posts' });
                     }
 
                 } catch(err) {

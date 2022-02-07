@@ -1,7 +1,7 @@
 export async function getSeriesDetails(id) {
     try {
 
-        let response = await fetch('http://localhost:8000/api/tvseries/' + id);
+        let response = await fetch('http://localhost:8000/api/posts/' + id);
 
         let responseToJson = await response.json();
 

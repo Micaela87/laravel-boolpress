@@ -3,56 +3,59 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Series;
+use App\Models\Posts;
 
 class ApiController extends Controller
 {
-    public function getAllTvSeries() {
-        $allSeries = Series::all();
 
-        return response()->json(['data' => $allSeries]);
+    public function getAllPosts() {
+        $allPosts = Posts::all();
+
+        return response()->json(['data' => $allPosts]);
     }
 
-    public function deleteTvSeries($id) {
+    public function deletePost($id) {
 
-        $tvSeriesToDelete = Series::findOrFail($id);
+        $postToDelete = Posts::findOrFail($id);
 
-        $tvSeriesToDelete -> delete();
+        $postToDelete -> delete();
 
-        return response()->json(['data' => Series::all()]);
+        return response()->json(['data' => Posts::all()]);
     }
 
-    public function getSingleTvSeries($id) {
+    public function getSinglePost($id) {
 
-        $singleTvSeries = Series::findOrFail($id);
+        $singlePost = Posts::findOrFail($id);
 
-        return response()->json(['data' => $singleTvSeries]);
+        return response()->json(['data' => $singlePost]);
     }
 
-    public function storeNewTvSeries(Request $request) {
+    public function storeNewPost(Request $request) {
 
         $data = $request -> validate([
-            'title' => 'required|unique:series|max:255',
+            'title' => 'required|unique:posts|max:255',
             'author' => 'required|max:255',
+            'content' => 'required',
             'release_date' => 'required|date',
             'rating' => 'max:5|min:0'
         ]);
 
-        $newSeries = Series::create($data);
+        $newPost = Posts::create($data);
 
         return response('ok', 200);
     }
 
-    public function updateTvSeries(Request $request, $id) {
+    public function updatePost(Request $request, $id) {
         $data = $request -> validate([
-            'title' => 'required|max:255|unique:series,title,' . $id,
+            'title' => 'required|max:255|unique:posts,title,' . $id,
             'author' => 'required|max:255',
+            'content' => 'required',
             'release_date' => 'required|date',
             'rating' => 'max:5|min:0'
         ]);
 
-        $updatedtSeries = Series::findOrFail($id);
-        $updatedtSeries -> update($data);
+        $updatedtPost = Posts::findOrFail($id);
+        $updatedtPost -> update($data);
 
         return response('ok', 200);
 

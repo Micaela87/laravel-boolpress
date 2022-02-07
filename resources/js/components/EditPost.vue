@@ -7,6 +7,7 @@
                 <input type="text" name="title" v-model="tvSeriesTitle"><br>
                 <label for="author">Autore</label><br>
                 <input type="text" name="author" v-model="tvSeriesAuthor"><br>
+                <textarea name="content" cols="30" rows="10" v-model="content"></textarea>
                 <label for="release_date">Data di rilascio</label><br>
                 <input type="date" name="release_date" v-model="tvSeriesReleaseDate"><br>
                 <label for="rating">Rating</label>
@@ -27,7 +28,7 @@
         data() {
             return {
                 singleTvSeries: {},
-                urlToPost: "http://localhost:8000/api/tvseries/update/" + this.$route.params.id
+                urlToPost: "http://localhost:8000/api/posts/update/" + this.$route.params.id
             }
         },
         created() {
@@ -58,6 +59,19 @@
                     }
 
                     return this.singleTvSeries.author;
+                }
+            },
+            content: {
+                get() {
+                    return this.singleTvSeries.content;
+                },
+                set(value) {
+                    if (value) {
+                        this.singleTvSeries.content = value;
+                        return this.singleTvSeries.content;
+                    }
+
+                    return this.singleTvSeries.content;
                 }
             },
             tvSeriesRating: {
@@ -97,6 +111,7 @@
                 let data = JSON.stringify({
                     title: this.tvSeriesTitle,
                     author: this.tvSeriesAuthor,
+                    content: this.content,
                     release_date: this.tvSeriesReleaseDate,
                     rating: this.tvSeriesRating
                 });
@@ -112,7 +127,7 @@
                     });
 
                     if (response.ok) {
-                        this.$router.push({ name: 'tvseries' });
+                        this.$router.push({ name: 'posts' });
                     }
 
                 } catch(err) {

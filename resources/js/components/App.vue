@@ -99,7 +99,7 @@
                     });
 
                     if (response.ok) {
-                        this.$router.push({ name: 'tvseries' });
+                        this.$router.push({ name: 'posts' });
                     }
 
                 } catch(err) {
@@ -124,7 +124,7 @@
                     });
 
                     if (response.ok) {
-                        this.$router.push({ name: 'tvseries' });
+                        this.$router.push({ name: 'posts' });
                     }
 
                 } catch(err) {
