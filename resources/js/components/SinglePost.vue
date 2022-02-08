@@ -32,15 +32,19 @@
         methods: {
             showDetails: async function() {
                 this.singlePost = await getDetails(this.$route.params.id);
-                
-                let response = await fetch('http://localhost:8000/api/categories/' + this.singlePost.category_id);
 
-                let responseToJson = await response.json();
+                try {
+                    let response = await fetch('http://localhost:8000/api/categories/' + this.singlePost.category_id);
 
-                if (response.ok) {
-                    this.postCategory = responseToJson.data;
+                    let responseToJson = await response.json();
+
+                    if (response.ok) {
+                        this.postCategory = responseToJson.data;
+                    }
+                } catch(err) {
+                    console.log(err);
                 }
-
+                
             }
         },
     }

@@ -2626,27 +2626,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 this.singlePost = _context.sent;
-                _context.next = 5;
+                _context.prev = 3;
+                _context.next = 6;
                 return fetch('http://localhost:8000/api/categories/' + this.singlePost.category_id);
 
-              case 5:
+              case 6:
                 response = _context.sent;
-                _context.next = 8;
+                _context.next = 9;
                 return response.json();
 
-              case 8:
+              case 9:
                 responseToJson = _context.sent;
 
                 if (response.ok) {
                   this.postCategory = responseToJson.data;
                 }
 
-              case 10:
+                _context.next = 16;
+                break;
+
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](3);
+                console.log(_context.t0);
+
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, this, [[3, 13]]);
       }));
 
       function showDetails() {
