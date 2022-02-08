@@ -18,22 +18,25 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+// authentication routes
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::post('/logout', 'Auth\LoginController@logout');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
+// posts routes
 Route::get('/posts', 'ApiController@getAllPosts');
-
-Route::get('/categories', 'ApiController@getAllCategories');
 
 Route::get('/posts/delete/{id}', 'ApiController@deletePost');
 
 Route::get('/posts/{id}', 'ApiController@getSinglePost');
 
-Route::get('/categories/{id}', 'ApiController@getPostCategory');
-
 Route::post('/posts/store', 'ApiController@storeNewPost');
 
 Route::post('/posts/update/{id}', 'ApiController@updatePost');
+
+// categories routes
+Route::get('/categories', 'ApiController@getAllCategories');
+
+Route::get('/categories/{id}', 'ApiController@getPostCategory');

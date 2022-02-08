@@ -1,6 +1,6 @@
 <template>
     <div class="container-series">
-        <h1>Post currently vvailable</h1>
+        <h1>Post currently available</h1>
         <div v-for="(post, i) in posts"  class="item">
             <div>Title: {{ post.title }}</div>
             <div>Author: {{ post.author }}</div>
@@ -13,7 +13,7 @@
             </router-link>
         </div>
         <router-link :to="{ name: 'add'}">
-            <button class="add-btn">Add new TV Series</button>
+            <button class="add-btn">Add new post</button>
         </router-link>
     </div>
 </template>

@@ -39287,7 +39287,7 @@ var render = function () {
     "div",
     { staticClass: "container-series" },
     [
-      _c("h1", [_vm._v("Post currently vvailable")]),
+      _c("h1", [_vm._v("Post currently available")]),
       _vm._v(" "),
       _vm._l(_vm.posts, function (post, i) {
         return _c(
@@ -39332,7 +39332,7 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("router-link", { attrs: { to: { name: "add" } } }, [
-        _c("button", { staticClass: "add-btn" }, [_vm._v("Add new TV Series")]),
+        _c("button", { staticClass: "add-btn" }, [_vm._v("Add new post")]),
       ]),
     ],
     2
