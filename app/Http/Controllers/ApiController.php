@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\Categories;
+use App\Models\Tags;
 
 class ApiController extends Controller
 {
@@ -61,6 +62,12 @@ class ApiController extends Controller
 
         $newPost -> save();
 
+        $tags = Tags::findOrFail($request -> tags);
+
+        $newPost -> tags() -> attach($tags);
+
+        $newPost -> save();
+
         return response('ok', 200);
     }
 
@@ -78,5 +85,12 @@ class ApiController extends Controller
 
         return response('ok', 200);
 
+    }
+
+    public function getAllTags() {
+
+        $allTags = Tags::all();
+
+        return response() -> json(['data' => $allTags]);
     }
 }

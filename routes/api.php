@@ -40,3 +40,6 @@ Route::post('/posts/update/{id}', 'ApiController@updatePost');
 Route::get('/categories', 'ApiController@getAllCategories');
 
 Route::get('/categories/{id}', 'ApiController@getPostCategory');
+
+// tags routes
+Route::get('/tags', 'ApiController@getAllTags');

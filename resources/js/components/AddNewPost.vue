@@ -12,6 +12,10 @@
             <select name="category" v-model="categoryId">
                 <option v-for="(category, i) in categoryArr" :value="category.id">{{ category.name }}</option>
             </select><br>
+            <div v-for="(tag, i) in tagsArr">
+                <label :for="tag.name">{{ tag.name }}</label>
+                <input type="checkbox" name="tag" :value="tag.id" v-model="checkedTags">
+            </div>
             <label for="release_date">Data di rilascio</label><br>
             <input type="date" name="release_date" v-model="releaseDate"><br>
             <label for="rating">Rating</label>
@@ -32,11 +36,14 @@
                 releaseDate: '',
                 rating: '',
                 categoryArr: [],
-                categoryId: ''
+                categoryId: '',
+                tagsArr: [],
+                checkedTags: []
             }
         },
         created() {
             this.getAllCategories();
+            this.getAllTags();
         },
         methods: {
             sendDataToStore: async function() {
@@ -47,7 +54,8 @@
                     content: this.content,
                     release_date: this.releaseDate,
                     rating: this.rating,
-                    category_id: this.categoryId
+                    category_id: this.categoryId,
+                    tags: this.checkedTags
                 }
                 try {
 
@@ -78,6 +86,22 @@
                         this.categoryArr = responseToJson.data;
 
                     }
+                } catch(err) {
+                    console.log(err);
+                }
+            },
+            getAllTags: async function() {
+                try {
+
+                    let response = await fetch('http://localhost:8000/api/tags');
+
+                    if (response.ok) {
+
+                        let responseToJson = await response.json();
+                        this.tagsArr = responseToJson.data;
+
+                    }
+
                 } catch(err) {
                     console.log(err);
                 }
