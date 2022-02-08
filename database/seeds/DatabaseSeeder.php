@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Posts;
+use App\Models\Tags;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategorySeeder::class,
-            // PostsSeeder::class
+            PostsSeeder::class,
+            TagsSeeder::class
         ]);
     }
 }

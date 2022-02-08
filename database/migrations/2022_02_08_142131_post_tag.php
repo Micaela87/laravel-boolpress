@@ -13,12 +13,12 @@ class PostTag extends Migration
      */
     public function up()
     {
-        Schema::create('post_tag', function (Blueprint $table) {
+        Schema::create('posts_tags', function (Blueprint $table) {
 
             $table -> id();
 
-            $table -> foreignId('post_id') -> constrained('posts');
-            $table -> foreignId('tag_id') -> constrained('tags');
+            $table -> foreignId('posts_id') -> constrained('posts');
+            $table -> foreignId('tags_id') -> constrained('tags');
 
         });
     }
@@ -30,13 +30,11 @@ class PostTag extends Migration
      */
     public function down()
     {
-        // Schema::create('post_tag', function (Blueprint $table) {
+        Schema::create('posts_tags', function (Blueprint $table) {
 
-        //     // $table->dropForeign('posts_user_id_foreign');
+            $table -> dropForeign('posts_tags_posts_id_foreign');
+            $table -> dropForeign('posts_tags_tags_id_foreign');
 
-        //     $table -> dropForeign('post_tag_post_id_foreign');
-        //     $table -> dropForeign('post_tag_post_id_foreign');
-
-        // });
+        });
     }
 }
