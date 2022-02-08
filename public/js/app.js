@@ -1948,6 +1948,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1955,8 +1959,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       author: '',
       content: '',
       releaseDate: '',
-      rating: ''
+      rating: '',
+      categoryArr: [],
+      categoryId: ''
     };
+  },
+  created: function created() {
+    this.getAllCategories();
   },
   methods: {
     sendDataToStore: function () {
@@ -1971,7 +1980,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   author: this.author,
                   content: this.content,
                   release_date: this.releaseDate,
-                  rating: this.rating
+                  rating: this.rating,
+                  category_id: this.categoryId
                 };
                 _context.prev = 1;
                 _context.next = 4;
@@ -2013,6 +2023,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return sendDataToStore;
+    }(),
+    getAllCategories: function () {
+      var _getAllCategories = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response, responseToJson;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return fetch('http://localhost:8000/api/categories');
+
+              case 3:
+                response = _context2.sent;
+
+                if (!response.ok) {
+                  _context2.next = 9;
+                  break;
+                }
+
+                _context2.next = 7;
+                return response.json();
+
+              case 7:
+                responseToJson = _context2.sent;
+                this.categoryArr = responseToJson.data;
+
+              case 9:
+                _context2.next = 14;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 14:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 11]]);
+      }));
+
+      function getAllCategories() {
+        return _getAllCategories.apply(this, arguments);
+      }
+
+      return getAllCategories;
     }()
   }
 });
@@ -2491,9 +2550,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 this.singlePost = _context.sent;
-                console.log(this.singlePost);
 
-              case 4:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -2632,30 +2690,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 response = _context.sent;
-                _context.next = 9;
-                return response.json();
 
-              case 9:
-                responseToJson = _context.sent;
-
-                if (response.ok) {
-                  this.postCategory = responseToJson.data;
+                if (!response.ok) {
+                  _context.next = 12;
+                  break;
                 }
 
-                _context.next = 16;
+                _context.next = 10;
+                return response.json();
+
+              case 10:
+                responseToJson = _context.sent;
+                this.postCategory = responseToJson.data;
+
+              case 12:
+                _context.next = 17;
                 break;
 
-              case 13:
-                _context.prev = 13;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](3);
                 console.log(_context.t0);
 
-              case 16:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 13]]);
+        }, _callee, this, [[3, 14]]);
       }));
 
       function showDetails() {
@@ -39097,6 +39159,45 @@ var render = function () {
           },
         },
       }),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "category" } }, [_vm._v("Category")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.categoryId,
+              expression: "categoryId",
+            },
+          ],
+          attrs: { name: "category" },
+          on: {
+            change: function ($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function (o) {
+                  return o.selected
+                })
+                .map(function (o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.categoryId = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+          },
+        },
+        _vm._l(_vm.categoryArr, function (category, i) {
+          return _c("option", { domProps: { value: category.id } }, [
+            _vm._v(_vm._s(category.name)),
+          ])
+        }),
+        0
+      ),
       _c("br"),
       _vm._v(" "),
       _c("label", { attrs: { for: "release_date" } }, [

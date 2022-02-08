@@ -53,7 +53,13 @@ class ApiController extends Controller
             'rating' => 'max:5|min:0'
         ]);
 
-        $newPost = Posts::create($data);
+        $category = Categories::findOrFail($request -> category_id);
+
+        $newPost = Posts::make($data);
+
+        $newPost -> category() -> associate($category);
+
+        $newPost -> save();
 
         return response('ok', 200);
     }

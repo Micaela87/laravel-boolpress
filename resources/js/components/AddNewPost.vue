@@ -8,6 +8,10 @@
             <input type="text" name="author" v-model="author"><br>
             <label for="content">Content</label><br>
             <textarea name="content" cols="30" rows="10" v-model="content"></textarea><br>
+            <label for="category">Category</label>
+            <select name="category" v-model="categoryId">
+                <option v-for="(category, i) in categoryArr" :value="category.id">{{ category.name }}</option>
+            </select><br>
             <label for="release_date">Data di rilascio</label><br>
             <input type="date" name="release_date" v-model="releaseDate"><br>
             <label for="rating">Rating</label>
@@ -26,8 +30,13 @@
                 author: '',
                 content: '',
                 releaseDate: '',
-                rating: ''
+                rating: '',
+                categoryArr: [],
+                categoryId: ''
             }
+        },
+        created() {
+            this.getAllCategories();
         },
         methods: {
             sendDataToStore: async function() {
@@ -37,7 +46,8 @@
                     author: this.author,
                     content: this.content,
                     release_date: this.releaseDate,
-                    rating: this.rating
+                    rating: this.rating,
+                    category_id: this.categoryId
                 }
                 try {
 
@@ -57,6 +67,20 @@
                     console.log(err);
                 }
 
+            },
+            getAllCategories: async function() {
+                try {
+                    let response = await fetch('http://localhost:8000/api/categories');
+
+                    if (response.ok) {
+
+                        let responseToJson = await response.json();
+                        this.categoryArr = responseToJson.data;
+
+                    }
+                } catch(err) {
+                    console.log(err);
+                }
             }
         }
     }

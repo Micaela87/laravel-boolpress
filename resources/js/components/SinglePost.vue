@@ -36,9 +36,8 @@
                 try {
                     let response = await fetch('http://localhost:8000/api/categories/' + this.singlePost.category_id);
 
-                    let responseToJson = await response.json();
-
                     if (response.ok) {
+                        let responseToJson = await response.json();
                         this.postCategory = responseToJson.data;
                     }
                 } catch(err) {

@@ -23,7 +23,7 @@
         data() {
             return {
                 singlePost: {},
-                urlToPost: "http://localhost:8000/api/posts/update/" + this.$route.params.id
+                urlToPost: "http://localhost:8000/api/posts/update/" + this.$route.params.id,
             }
         },
         created() {
@@ -99,7 +99,6 @@
         methods: {
             showDetails: async function() {
                 this.singlePost = await getDetails(this.$route.params.id);
-                console.log(this.singlePost);
             },
             updatePost: async function() {
 
