@@ -26,11 +26,10 @@
             }
         },
         mounted() {
-            console.log('Component mounted.');
-            this.callToHome();
+            this.getAllPosts();
         },
         methods: {
-            callToHome: async function() {
+            getAllPosts: async function() {
                 try {
 
                     let response = await fetch('http://localhost:8000/api/posts');

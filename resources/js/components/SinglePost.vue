@@ -1,10 +1,11 @@
 <template>
     <div class="container-series">
-        <div v-if="singleTvSeries">
-            <h2>Title: {{ singleTvSeries.title }}</h2>
-            <h3>Author: {{ singleTvSeries.author }}</h3>
-            <h4>Rating: {{ singleTvSeries.rating }}</h4>
-            <h4>Release Date: {{ singleTvSeries.release_date }}</h4>
+        <div v-if="singlePost">
+            <h2>Title: {{ singlePost.title }}</h2>
+            <h3>Author: {{ singlePost.author }}</h3>
+            <p>{{ singlePost.content }}</p>
+            <h4>Rating: {{ singlePost.rating }}</h4>
+            <h4>Release Date: {{ singlePost.release_date }}</h4>
         </div>
         <div v-else>
             Loading...
@@ -15,20 +16,20 @@
 
 <script>
 
-    import { getSeriesDetails } from "../utils";
+    import { getDetails } from "../utils";
 
     export default {
         data() {
             return {
-                singleTvSeries: ''
+                singlePost: ''
             }
         },
         created() {
-            this.showSeriesDetails();
+            this.showDetails();
         },
         methods: {
-            showSeriesDetails: async function() {
-                this.singleTvSeries = await getSeriesDetails(this.$route.params.id);
+            showDetails: async function() {
+                this.singlePost = await getDetails(this.$route.params.id);
             }
         },
     }

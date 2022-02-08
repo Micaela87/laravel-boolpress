@@ -1,119 +1,114 @@
 <template>
     <div class="container-series">
         <h1>Update TV Series</h1>
-        <div v-if="singleTvSeries">
-            <form>
-                <label for="title">Titolo</label><br>
-                <input type="text" name="title" v-model="tvSeriesTitle"><br>
-                <label for="author">Autore</label><br>
-                <input type="text" name="author" v-model="tvSeriesAuthor"><br>
-                <textarea name="content" cols="30" rows="10" v-model="content"></textarea>
-                <label for="release_date">Data di rilascio</label><br>
-                <input type="date" name="release_date" v-model="tvSeriesReleaseDate"><br>
-                <label for="rating">Rating</label>
-                <input type="number" name="rating" min="1" max="5" v-model="tvSeriesRating">
-                <input type="button" value="Submit" @click="updateTvSeries()">
-            </form>
-        </div>
-        <div v-else>
-            Loading...
-        </div>
+        <form>
+            <label for="title">Titolo</label><br>
+            <input type="text" name="title" v-model="postTitle"><br>
+            <label for="author">Autore</label><br>
+            <input type="text" name="author" v-model="postAuthor"><br>
+            <textarea name="content" cols="30" rows="10" v-model="postContent"></textarea>
+            <label for="release_date">Data di rilascio</label><br>
+            <input type="date" name="release_date" v-model="postReleaseDate"><br>
+            <label for="rating">Rating</label>
+            <input type="number" name="rating" min="1" max="5" v-model="postRating">
+            <input type="button" value="Submit" @click="updatePost()">
+        </form>
     </div>
 </template>
 
 <script>
-    import { getSeriesDetails } from "../utils";
+    import { getDetails } from "../utils";
 
     export default {
         data() {
             return {
-                singleTvSeries: {},
+                singlePost: {},
                 urlToPost: "http://localhost:8000/api/posts/update/" + this.$route.params.id
             }
         },
         created() {
-            this.showSeriesDetails();
+            this.showDetails();
         },
         computed: {
-            tvSeriesTitle: {
+            postTitle: {
                 get() {
-                    return this.singleTvSeries.title;
+                    return this.singlePost.title;
                 },
                 set(value) {
                     if (value) {
-                        this.singleTvSeries.title = value;
-                        return this.singleTvSeries.title;
+                        this.singlePost.title = value;
+                        return this.singlePost.title;
                     }
 
-                    return this.singleTvSeries.title;
+                    return this.singlePost.title;
                 }
             },
-            tvSeriesAuthor: {
+            postAuthor: {
                 get() {
-                    return this.singleTvSeries.author;
+                    return this.singlePost.author;
                 },
                 set(value) {
                     if (value) {
-                        this.singleTvSeries.author = value;
-                        return this.singleTvSeries.author;
+                        this.singlePost.author = value;
+                        return this.singlePost.author;
                     }
 
-                    return this.singleTvSeries.author;
+                    return this.singlePost.author;
                 }
             },
-            content: {
+            postContent: {
                 get() {
-                    return this.singleTvSeries.content;
+                    return this.singlePost.content;
                 },
                 set(value) {
                     if (value) {
-                        this.singleTvSeries.content = value;
-                        return this.singleTvSeries.content;
+                        this.singlePost.content = value;
+                        return this.singlePost.content;
                     }
 
-                    return this.singleTvSeries.content;
+                    return this.singlePost.content;
                 }
             },
-            tvSeriesRating: {
+            postRating: {
                 get() {
-                    return this.singleTvSeries.rating;
+                    return this.singlePost.rating;
                 },
                 set(value) {
                     if (value) {
-                        this.singleTvSeries.rating = value;
-                        return this.singleTvSeries.rating;
+                        this.singlePost.rating = value;
+                        return this.singlePost.rating;
                     }
 
-                    return this.singleTvSeries.rating;
+                    return this.singlePost.rating;
                 }
             },
-            tvSeriesReleaseDate: {
+            postReleaseDate: {
                 get() {
-                    return this.singleTvSeries.release_date;
+                    return this.singlePost.release_date;
                 },
                 set(value) {
                     if (value) {
-                        this.singleTvSeries.release_date = value;
-                        return this.singleTvSeries.release_date;
+                        this.singlePost.release_date = value;
+                        return this.singlePost.release_date;
                     }
 
-                    return this.singleTvSeries.release_date;
+                    return this.singlePost.release_date;
                 }
             }
         },
         methods: {
-            showSeriesDetails: async function() {
-                this.singleTvSeries = await getSeriesDetails(this.$route.params.id);
-                console.log(this.singleTvSeries);
+            showDetails: async function() {
+                this.singlePost = await getDetails(this.$route.params.id);
+                console.log(this.singlePost);
             },
-            updateTvSeries: async function() {
+            updatePost: async function() {
 
                 let data = JSON.stringify({
-                    title: this.tvSeriesTitle,
-                    author: this.tvSeriesAuthor,
-                    content: this.content,
-                    release_date: this.tvSeriesReleaseDate,
-                    rating: this.tvSeriesRating
+                    title: this.postTitle,
+                    author: this.postAuthor,
+                    content: this.postContent,
+                    release_date: this.postReleaseDate,
+                    rating: this.postRating
                 });
 
                 try {

@@ -1,4 +1,4 @@
-export async function getSeriesDetails(id) {
+export async function getDetails(id) {
     try {
 
         let response = await fetch('http://localhost:8000/api/posts/' + id);

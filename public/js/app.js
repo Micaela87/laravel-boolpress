@@ -2063,12 +2063,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
-    this.callToHome();
+    this.getAllPosts();
   },
   methods: {
-    callToHome: function () {
-      var _callToHome = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    getAllPosts: function () {
+      var _getAllPosts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response, responseToJson;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -2102,11 +2101,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this, [[0, 10]]);
       }));
 
-      function callToHome() {
-        return _callToHome.apply(this, arguments);
+      function getAllPosts() {
+        return _getAllPosts.apply(this, arguments);
       }
 
-      return callToHome;
+      return getAllPosts;
     }(),
     deleteRecord: function () {
       var _deleteRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
@@ -2402,102 +2401,97 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      singleTvSeries: {},
+      singlePost: {},
       urlToPost: "http://localhost:8000/api/posts/update/" + this.$route.params.id
     };
   },
   created: function created() {
-    this.showSeriesDetails();
+    this.showDetails();
   },
   computed: {
-    tvSeriesTitle: {
+    postTitle: {
       get: function get() {
-        return this.singleTvSeries.title;
+        return this.singlePost.title;
       },
       set: function set(value) {
         if (value) {
-          this.singleTvSeries.title = value;
-          return this.singleTvSeries.title;
+          this.singlePost.title = value;
+          return this.singlePost.title;
         }
 
-        return this.singleTvSeries.title;
+        return this.singlePost.title;
       }
     },
-    tvSeriesAuthor: {
+    postAuthor: {
       get: function get() {
-        return this.singleTvSeries.author;
+        return this.singlePost.author;
       },
       set: function set(value) {
         if (value) {
-          this.singleTvSeries.author = value;
-          return this.singleTvSeries.author;
+          this.singlePost.author = value;
+          return this.singlePost.author;
         }
 
-        return this.singleTvSeries.author;
+        return this.singlePost.author;
       }
     },
-    content: {
+    postContent: {
       get: function get() {
-        return this.singleTvSeries.content;
+        return this.singlePost.content;
       },
       set: function set(value) {
         if (value) {
-          this.singleTvSeries.content = value;
-          return this.singleTvSeries.content;
+          this.singlePost.content = value;
+          return this.singlePost.content;
         }
 
-        return this.singleTvSeries.content;
+        return this.singlePost.content;
       }
     },
-    tvSeriesRating: {
+    postRating: {
       get: function get() {
-        return this.singleTvSeries.rating;
+        return this.singlePost.rating;
       },
       set: function set(value) {
         if (value) {
-          this.singleTvSeries.rating = value;
-          return this.singleTvSeries.rating;
+          this.singlePost.rating = value;
+          return this.singlePost.rating;
         }
 
-        return this.singleTvSeries.rating;
+        return this.singlePost.rating;
       }
     },
-    tvSeriesReleaseDate: {
+    postReleaseDate: {
       get: function get() {
-        return this.singleTvSeries.release_date;
+        return this.singlePost.release_date;
       },
       set: function set(value) {
         if (value) {
-          this.singleTvSeries.release_date = value;
-          return this.singleTvSeries.release_date;
+          this.singlePost.release_date = value;
+          return this.singlePost.release_date;
         }
 
-        return this.singleTvSeries.release_date;
+        return this.singlePost.release_date;
       }
     }
   },
   methods: {
-    showSeriesDetails: function () {
-      var _showSeriesDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    showDetails: function () {
+      var _showDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getSeriesDetails"])(this.$route.params.id);
+                return Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getDetails"])(this.$route.params.id);
 
               case 2:
-                this.singleTvSeries = _context.sent;
-                console.log(this.singleTvSeries);
+                this.singlePost = _context.sent;
+                console.log(this.singlePost);
 
               case 4:
               case "end":
@@ -2507,25 +2501,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function showSeriesDetails() {
-        return _showSeriesDetails.apply(this, arguments);
+      function showDetails() {
+        return _showDetails.apply(this, arguments);
       }
 
-      return showSeriesDetails;
+      return showDetails;
     }(),
-    updateTvSeries: function () {
-      var _updateTvSeries = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    updatePost: function () {
+      var _updatePost = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var data, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 data = JSON.stringify({
-                  title: this.tvSeriesTitle,
-                  author: this.tvSeriesAuthor,
-                  content: this.content,
-                  release_date: this.tvSeriesReleaseDate,
-                  rating: this.tvSeriesRating
+                  title: this.postTitle,
+                  author: this.postAuthor,
+                  content: this.postContent,
+                  release_date: this.postReleaseDate,
+                  rating: this.postRating
                 });
                 _context2.prev = 1;
                 _context2.next = 4;
@@ -2562,11 +2556,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, this, [[1, 8]]);
       }));
 
-      function updateTvSeries() {
-        return _updateTvSeries.apply(this, arguments);
+      function updatePost() {
+        return _updatePost.apply(this, arguments);
       }
 
-      return updateTvSeries;
+      return updatePost;
     }()
   }
 });
@@ -2606,28 +2600,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      singleTvSeries: ''
+      singlePost: ''
     };
   },
   created: function created() {
-    this.showSeriesDetails();
+    this.showDetails();
   },
   methods: {
-    showSeriesDetails: function () {
-      var _showSeriesDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    showDetails: function () {
+      var _showDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getSeriesDetails"])(this.$route.params.id);
+                return Object(_utils__WEBPACK_IMPORTED_MODULE_1__["getDetails"])(this.$route.params.id);
 
               case 2:
-                this.singleTvSeries = _context.sent;
+                this.singlePost = _context.sent;
 
               case 3:
               case "end":
@@ -2637,11 +2632,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function showSeriesDetails() {
-        return _showSeriesDetails.apply(this, arguments);
+      function showDetails() {
+        return _showDetails.apply(this, arguments);
       }
 
-      return showSeriesDetails;
+      return showDetails;
     }()
   }
 });
@@ -39547,141 +39542,137 @@ var render = function () {
   return _c("div", { staticClass: "container-series" }, [
     _c("h1", [_vm._v("Update TV Series")]),
     _vm._v(" "),
-    _vm.singleTvSeries
-      ? _c("div", [
-          _c("form", [
-            _c("label", { attrs: { for: "title" } }, [_vm._v("Titolo")]),
-            _c("br"),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.tvSeriesTitle,
-                  expression: "tvSeriesTitle",
-                },
-              ],
-              attrs: { type: "text", name: "title" },
-              domProps: { value: _vm.tvSeriesTitle },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.tvSeriesTitle = $event.target.value
-                },
-              },
-            }),
-            _c("br"),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "author" } }, [_vm._v("Autore")]),
-            _c("br"),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.tvSeriesAuthor,
-                  expression: "tvSeriesAuthor",
-                },
-              ],
-              attrs: { type: "text", name: "author" },
-              domProps: { value: _vm.tvSeriesAuthor },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.tvSeriesAuthor = $event.target.value
-                },
-              },
-            }),
-            _c("br"),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.content,
-                  expression: "content",
-                },
-              ],
-              attrs: { name: "content", cols: "30", rows: "10" },
-              domProps: { value: _vm.content },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.content = $event.target.value
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "release_date" } }, [
-              _vm._v("Data di rilascio"),
-            ]),
-            _c("br"),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.tvSeriesReleaseDate,
-                  expression: "tvSeriesReleaseDate",
-                },
-              ],
-              attrs: { type: "date", name: "release_date" },
-              domProps: { value: _vm.tvSeriesReleaseDate },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.tvSeriesReleaseDate = $event.target.value
-                },
-              },
-            }),
-            _c("br"),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "rating" } }, [_vm._v("Rating")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.tvSeriesRating,
-                  expression: "tvSeriesRating",
-                },
-              ],
-              attrs: { type: "number", name: "rating", min: "1", max: "5" },
-              domProps: { value: _vm.tvSeriesRating },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.tvSeriesRating = $event.target.value
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "button", value: "Submit" },
-              on: {
-                click: function ($event) {
-                  return _vm.updateTvSeries()
-                },
-              },
-            }),
-          ]),
-        ])
-      : _c("div", [_vm._v("\n        Loading...\n    ")]),
+    _c("form", [
+      _c("label", { attrs: { for: "title" } }, [_vm._v("Titolo")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.postTitle,
+            expression: "postTitle",
+          },
+        ],
+        attrs: { type: "text", name: "title" },
+        domProps: { value: _vm.postTitle },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.postTitle = $event.target.value
+          },
+        },
+      }),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "author" } }, [_vm._v("Autore")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.postAuthor,
+            expression: "postAuthor",
+          },
+        ],
+        attrs: { type: "text", name: "author" },
+        domProps: { value: _vm.postAuthor },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.postAuthor = $event.target.value
+          },
+        },
+      }),
+      _c("br"),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.postContent,
+            expression: "postContent",
+          },
+        ],
+        attrs: { name: "content", cols: "30", rows: "10" },
+        domProps: { value: _vm.postContent },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.postContent = $event.target.value
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "release_date" } }, [
+        _vm._v("Data di rilascio"),
+      ]),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.postReleaseDate,
+            expression: "postReleaseDate",
+          },
+        ],
+        attrs: { type: "date", name: "release_date" },
+        domProps: { value: _vm.postReleaseDate },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.postReleaseDate = $event.target.value
+          },
+        },
+      }),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "rating" } }, [_vm._v("Rating")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.postRating,
+            expression: "postRating",
+          },
+        ],
+        attrs: { type: "number", name: "rating", min: "1", max: "5" },
+        domProps: { value: _vm.postRating },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.postRating = $event.target.value
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "button", value: "Submit" },
+        on: {
+          click: function ($event) {
+            return _vm.updatePost()
+          },
+        },
+      }),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -39707,16 +39698,18 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-series" }, [
-    _vm.singleTvSeries
+    _vm.singlePost
       ? _c("div", [
-          _c("h2", [_vm._v("Title: " + _vm._s(_vm.singleTvSeries.title))]),
+          _c("h2", [_vm._v("Title: " + _vm._s(_vm.singlePost.title))]),
           _vm._v(" "),
-          _c("h3", [_vm._v("Author: " + _vm._s(_vm.singleTvSeries.author))]),
+          _c("h3", [_vm._v("Author: " + _vm._s(_vm.singlePost.author))]),
           _vm._v(" "),
-          _c("h4", [_vm._v("Rating: " + _vm._s(_vm.singleTvSeries.rating))]),
+          _c("p", [_vm._v(_vm._s(_vm.singlePost.content))]),
+          _vm._v(" "),
+          _c("h4", [_vm._v("Rating: " + _vm._s(_vm.singlePost.rating))]),
           _vm._v(" "),
           _c("h4", [
-            _vm._v("Release Date: " + _vm._s(_vm.singleTvSeries.release_date)),
+            _vm._v("Release Date: " + _vm._s(_vm.singlePost.release_date)),
           ]),
         ])
       : _c("div", [_vm._v("\n        Loading...\n    ")]),
@@ -55626,12 +55619,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./resources/js/utils.js ***!
   \*******************************/
-/*! exports provided: getSeriesDetails */
+/*! exports provided: getDetails */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSeriesDetails", function() { return getSeriesDetails; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDetails", function() { return getDetails; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -55640,12 +55633,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function getSeriesDetails(_x) {
-  return _getSeriesDetails.apply(this, arguments);
+function getDetails(_x) {
+  return _getDetails.apply(this, arguments);
 }
 
-function _getSeriesDetails() {
-  _getSeriesDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
+function _getDetails() {
+  _getDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
     var response, responseToJson;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
@@ -55676,7 +55669,7 @@ function _getSeriesDetails() {
       }
     }, _callee, null, [[0, 10]]);
   }));
-  return _getSeriesDetails.apply(this, arguments);
+  return _getDetails.apply(this, arguments);
 }
 
 /***/ }),
