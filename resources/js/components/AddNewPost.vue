@@ -1,13 +1,13 @@
 <template>
     <div class="container-series">
-        <h1>Fill in the folloiwing form to add a new TV series</h1>
+        <h1>Fill in the folloiwing form to add a new post</h1>
         <form>
             <label for="title">Titolo</label><br>
             <input type="text" name="title" v-model="title"><br>
             <label for="author">Autore</label><br>
             <input type="text" name="author" v-model="author"><br>
             <label for="content">Content</label><br>
-            <textarea name="content" cols="30" rows="10" v-model="content"></textarea>
+            <textarea name="content" cols="30" rows="10" v-model="content"></textarea><br>
             <label for="release_date">Data di rilascio</label><br>
             <input type="date" name="release_date" v-model="releaseDate"><br>
             <label for="rating">Rating</label>

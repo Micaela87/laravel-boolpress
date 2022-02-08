@@ -2601,11 +2601,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      singlePost: ''
+      singlePost: '',
+      postCategory: ''
     };
   },
   created: function created() {
@@ -2614,6 +2616,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     showDetails: function () {
       var _showDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response, responseToJson;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2623,8 +2626,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 this.singlePost = _context.sent;
+                _context.next = 5;
+                return fetch('http://localhost:8000/api/categories/' + this.singlePost.category_id);
 
-              case 3:
+              case 5:
+                response = _context.sent;
+                _context.next = 8;
+                return response.json();
+
+              case 8:
+                responseToJson = _context.sent;
+
+                if (response.ok) {
+                  this.postCategory = responseToJson.data;
+                }
+
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -38995,7 +39012,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-series" }, [
-    _c("h1", [_vm._v("Fill in the folloiwing form to add a new TV series")]),
+    _c("h1", [_vm._v("Fill in the folloiwing form to add a new post")]),
     _vm._v(" "),
     _c("form", [
       _c("label", { attrs: { for: "title" } }, [_vm._v("Titolo")]),
@@ -39071,6 +39088,7 @@ var render = function () {
           },
         },
       }),
+      _c("br"),
       _vm._v(" "),
       _c("label", { attrs: { for: "release_date" } }, [
         _vm._v("Data di rilascio"),
@@ -39159,7 +39177,7 @@ var render = function () {
     "div",
     { staticClass: "container-series" },
     [
-      _c("h1", [_vm._v("TV Series Currently Available")]),
+      _c("h1", [_vm._v("Post currently vvailable")]),
       _vm._v(" "),
       _vm._l(_vm.posts, function (post, i) {
         return _c(
@@ -39540,7 +39558,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-series" }, [
-    _c("h1", [_vm._v("Update TV Series")]),
+    _c("h1", [_vm._v("Edit post")]),
     _vm._v(" "),
     _c("form", [
       _c("label", { attrs: { for: "title" } }, [_vm._v("Titolo")]),
@@ -39705,6 +39723,8 @@ var render = function () {
           _c("h3", [_vm._v("Author: " + _vm._s(_vm.singlePost.author))]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.singlePost.content))]),
+          _vm._v(" "),
+          _c("h4", [_vm._v("Category: " + _vm._s(_vm.postCategory.name))]),
           _vm._v(" "),
           _c("h4", [_vm._v("Rating: " + _vm._s(_vm.singlePost.rating))]),
           _vm._v(" "),

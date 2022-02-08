@@ -26,9 +26,13 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/posts', 'ApiController@getAllPosts');
 
+Route::get('/categories', 'ApiController@getAllCategories');
+
 Route::get('/posts/delete/{id}', 'ApiController@deletePost');
 
 Route::get('/posts/{id}', 'ApiController@getSinglePost');
+
+Route::get('/categories/{id}', 'ApiController@getPostCategory');
 
 Route::post('/posts/store', 'ApiController@storeNewPost');
 

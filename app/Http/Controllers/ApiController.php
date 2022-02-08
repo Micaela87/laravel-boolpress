@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Posts;
+use App\Models\Categories;
 
 class ApiController extends Controller
 {
@@ -12,6 +13,12 @@ class ApiController extends Controller
         $allPosts = Posts::all();
 
         return response()->json(['data' => $allPosts]);
+    }
+
+    public function getAllCategories() {
+        $allCategories = Categories::all();
+
+        return response()->json(['data' => $allCategories]);
     }
 
     public function deletePost($id) {
@@ -28,6 +35,12 @@ class ApiController extends Controller
         $singlePost = Posts::findOrFail($id);
 
         return response()->json(['data' => $singlePost]);
+    }
+
+    public function getPostCategory($id) {
+        $singleCategory = Categories::findOrFail($id);
+
+        return response()->json(['data' => $singleCategory]);
     }
 
     public function storeNewPost(Request $request) {

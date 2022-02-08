@@ -1,6 +1,6 @@
 <template>
     <div class="container-series">
-        <h1>TV Series Currently Available</h1>
+        <h1>Post currently vvailable</h1>
         <div v-for="(post, i) in posts"  class="item">
             <div>Title: {{ post.title }}</div>
             <div>Author: {{ post.author }}</div>

@@ -1,6 +1,6 @@
 <template>
     <div class="container-series">
-        <h1>Update TV Series</h1>
+        <h1>Edit post</h1>
         <form>
             <label for="title">Titolo</label><br>
             <input type="text" name="title" v-model="postTitle"><br>
