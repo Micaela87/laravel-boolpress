@@ -43,3 +43,5 @@ Route::get('/categories/{id}', 'ApiController@getPostCategory');
 
 // tags routes
 Route::get('/tags', 'ApiController@getAllTags');
+
+Route::get('/tags/{id}', 'ApiController@getTagsPerPost');

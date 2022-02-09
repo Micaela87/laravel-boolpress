@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\Categories;
 use App\Models\Tags;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -96,5 +97,19 @@ class ApiController extends Controller
         $allTags = Tags::all();
 
         return response() -> json(['data' => $allTags]);
+    }
+
+    public function getTagsPerPost($id) {
+        $tags = DB::table('posts_tags') -> where('posts_id', $id) -> get();
+
+        $tagIdList = [];
+
+        for ($i = 0; $i < count($tags); $i++) {
+            $tagIdList[$i] = $tags[$i] -> tags_id;
+        }
+
+        $tagNameList = Tags::findOrfail($tagIdList);
+
+        return response() -> json(['data' => $tagNameList]);
     }
 }

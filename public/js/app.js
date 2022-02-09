@@ -2717,12 +2717,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       singlePost: '',
-      postCategory: ''
+      postCategory: '',
+      postTags: ''
     };
   },
   created: function created() {
@@ -2731,7 +2736,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     showDetails: function () {
       var _showDetails = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, responseToJson;
+        var responseCategory, responseTags, responseToJson, _responseToJson;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2746,35 +2752,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return fetch('http://localhost:8000/api/categories/' + this.singlePost.category_id);
 
               case 6:
-                response = _context.sent;
+                responseCategory = _context.sent;
+                _context.next = 9;
+                return fetch('http://localhost:8000/api/tags/' + this.singlePost.id);
 
-                if (!response.ok) {
-                  _context.next = 12;
+              case 9:
+                responseTags = _context.sent;
+
+                if (!responseCategory.ok) {
+                  _context.next = 15;
                   break;
                 }
 
-                _context.next = 10;
-                return response.json();
+                _context.next = 13;
+                return responseCategory.json();
 
-              case 10:
+              case 13:
                 responseToJson = _context.sent;
                 this.postCategory = responseToJson.data;
 
-              case 12:
-                _context.next = 17;
+              case 15:
+                if (!responseTags.ok) {
+                  _context.next = 20;
+                  break;
+                }
+
+                _context.next = 18;
+                return responseTags.json();
+
+              case 18:
+                _responseToJson = _context.sent;
+                this.postTags = _responseToJson.data;
+
+              case 20:
+                _context.next = 25;
                 break;
 
-              case 14:
-                _context.prev = 14;
+              case 22:
+                _context.prev = 22;
                 _context.t0 = _context["catch"](3);
                 console.log(_context.t0);
 
-              case 17:
+              case 25:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 14]]);
+        }, _callee, this, [[3, 22]]);
       }));
 
       function showDetails() {
@@ -39943,6 +39967,16 @@ var render = function () {
           _c("p", [_vm._v(_vm._s(_vm.singlePost.content))]),
           _vm._v(" "),
           _c("h4", [_vm._v("Category: " + _vm._s(_vm.postCategory.name))]),
+          _vm._v(" "),
+          _c("h4", [_vm._v("Tags: ")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.postTags, function (tag, i) {
+              return _c("li", [_vm._v(_vm._s(tag.name))])
+            }),
+            0
+          ),
           _vm._v(" "),
           _c("h4", [_vm._v("Rating: " + _vm._s(_vm.singlePost.rating))]),
           _vm._v(" "),
