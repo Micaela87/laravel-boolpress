@@ -6,7 +6,11 @@
             <input type="text" name="title" v-model="postTitle"><br>
             <label for="author">Autore</label><br>
             <input type="text" name="author" v-model="postAuthor"><br>
-            <textarea name="content" cols="30" rows="10" v-model="postContent"></textarea>
+            <textarea name="content" cols="30" rows="10" v-model="postContent"></textarea><br>
+            <label for="category">Category</label>
+            <select name="category" v-model="postCategory">
+                <option v-for="(category, i) in allCategories" :value="category.id">{{ category.name }}</option>
+            </select><br>
             <label for="release_date">Data di rilascio</label><br>
             <input type="date" name="release_date" v-model="postReleaseDate"><br>
             <label for="rating">Rating</label>
@@ -24,6 +28,7 @@
             return {
                 singlePost: {},
                 urlToPost: 'http://localhost:8000/api/posts/' + this.$route.params.id + '/update',
+                allCategories: []
             }
         },
         created() {
@@ -94,11 +99,41 @@
 
                     return this.singlePost.release_date;
                 }
+            },
+            postCategory: {
+                get() {
+                    return this.singlePost.category_id
+                },
+                set(value) {
+                    if (value) {
+                        this.singlePost.category_id = value;
+                        return this.singlePost.category_id;
+                    }
+
+                    return this.singlePost.category_id;
+                }
             }
         },
         methods: {
             showDetails: async function() {
                 this.singlePost = await getDetails(this.$route.params.id);
+                this.getAllCategories();
+            },
+            getAllCategories: async function() {
+
+                try {
+
+                    let response = await fetch('http://localhost:8000/api/categories');
+
+                    if (response.ok) {
+                        let responseToJson = await response.json();
+
+                        this.allCategories = responseToJson.data;
+                    }
+
+                } catch(err) {
+                    console.log(err);
+                }
             },
             updatePost: async function() {
 
@@ -107,7 +142,8 @@
                     author: this.postAuthor,
                     content: this.postContent,
                     release_date: this.postReleaseDate,
-                    rating: this.postRating
+                    rating: this.postRating,
+                    category_id: this.postCategory
                 });
 
                 try {

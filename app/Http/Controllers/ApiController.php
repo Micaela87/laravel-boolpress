@@ -85,7 +85,14 @@ class ApiController extends Controller
             'rating' => 'max:5|min:0'
         ]);
 
+        $category = Categories::findOrFail($request -> category_id);
+
         $updatedtPost = Posts::findOrFail($id);
+
+        $updatedtPost -> category() -> associate($category);
+
+        $updatedtPost -> save();
+
         $updatedtPost -> update($data);
 
         return response('ok', 200);
