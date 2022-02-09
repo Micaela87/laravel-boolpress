@@ -2521,13 +2521,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       singlePost: {},
       urlToPost: 'http://localhost:8000/api/posts/' + this.$route.params.id + '/update',
-      allCategories: []
+      allCategories: [],
+      allTags: [],
+      checkedTags: []
     };
   },
   created: function created() {
@@ -2611,6 +2617,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         return this.singlePost.category_id;
       }
+    },
+    postTags: {
+      get: function get() {
+        return this.checkedTags;
+      },
+      set: function set(value) {
+        if (value) {
+          this.checkedTags = value;
+          return this.checkedTags;
+        }
+
+        return this.checkedTags;
+      }
     }
   },
   methods: {
@@ -2626,8 +2645,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 this.singlePost = _context.sent;
                 this.getAllCategories();
+                this.getAllTags();
+                this.getPostTags();
 
-              case 4:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -2690,12 +2711,112 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getAllCategories;
     }(),
-    updatePost: function () {
-      var _updatePost = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var data, response;
+    getAllTags: function () {
+      var _getAllTags = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response, responseToJson;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return fetch('http://localhost:8000/api/tags');
+
+              case 3:
+                response = _context3.sent;
+
+                if (!response.ok) {
+                  _context3.next = 9;
+                  break;
+                }
+
+                _context3.next = 7;
+                return response.json();
+
+              case 7:
+                responseToJson = _context3.sent;
+                this.allTags = responseToJson.data;
+
+              case 9:
+                _context3.next = 14;
+                break;
+
+              case 11:
+                _context3.prev = 11;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 14:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 11]]);
+      }));
+
+      function getAllTags() {
+        return _getAllTags.apply(this, arguments);
+      }
+
+      return getAllTags;
+    }(),
+    getPostTags: function () {
+      var _getPostTags = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response, responseToJson;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return fetch('http://localhost:8000/api/posts/' + this.$route.params.id + '/tags');
+
+              case 3:
+                response = _context4.sent;
+
+                if (!response.ok) {
+                  _context4.next = 9;
+                  break;
+                }
+
+                _context4.next = 7;
+                return response.json();
+
+              case 7:
+                responseToJson = _context4.sent;
+                this.checkedTags = responseToJson.data.map(function (x) {
+                  return x.id;
+                });
+
+              case 9:
+                _context4.next = 14;
+                break;
+
+              case 11:
+                _context4.prev = 11;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+              case 14:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 11]]);
+      }));
+
+      function getPostTags() {
+        return _getPostTags.apply(this, arguments);
+      }
+
+      return getPostTags;
+    }(),
+    updatePost: function () {
+      var _updatePost = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 data = JSON.stringify({
                   title: this.postTitle,
@@ -2703,10 +2824,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   content: this.postContent,
                   release_date: this.postReleaseDate,
                   rating: this.postRating,
-                  category_id: this.postCategory
+                  category_id: this.postCategory,
+                  tags: this.checkedTags
                 });
-                _context3.prev = 1;
-                _context3.next = 4;
+                _context5.prev = 1;
+                _context5.next = 4;
                 return fetch(this.urlToPost, {
                   method: 'POST',
                   headers: {
@@ -2716,7 +2838,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                response = _context3.sent;
+                response = _context5.sent;
 
                 if (response.ok) {
                   this.$router.push({
@@ -2724,20 +2846,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context3.next = 11;
+                _context5.next = 11;
                 break;
 
               case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](1);
-                console.log(_context3.t0);
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](1);
+                console.log(_context5.t0);
 
               case 11:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3, this, [[1, 8]]);
+        }, _callee5, this, [[1, 8]]);
       }));
 
       function updatePost() {
@@ -39871,177 +39993,228 @@ var render = function () {
   return _c("div", { staticClass: "container-series" }, [
     _c("h1", [_vm._v("Edit post")]),
     _vm._v(" "),
-    _c("form", [
-      _c("label", { attrs: { for: "title" } }, [_vm._v("Titolo")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postTitle,
-            expression: "postTitle",
-          },
-        ],
-        attrs: { type: "text", name: "title" },
-        domProps: { value: _vm.postTitle },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.postTitle = $event.target.value
-          },
-        },
-      }),
-      _c("br"),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "author" } }, [_vm._v("Autore")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postAuthor,
-            expression: "postAuthor",
-          },
-        ],
-        attrs: { type: "text", name: "author" },
-        domProps: { value: _vm.postAuthor },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.postAuthor = $event.target.value
-          },
-        },
-      }),
-      _c("br"),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postContent,
-            expression: "postContent",
-          },
-        ],
-        attrs: { name: "content", cols: "30", rows: "10" },
-        domProps: { value: _vm.postContent },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.postContent = $event.target.value
-          },
-        },
-      }),
-      _c("br"),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "category" } }, [_vm._v("Category")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
+    _c(
+      "form",
+      [
+        _c("label", { attrs: { for: "title" } }, [_vm._v("Titolo")]),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.postCategory,
-              expression: "postCategory",
+              value: _vm.postTitle,
+              expression: "postTitle",
             },
           ],
-          attrs: { name: "category" },
+          attrs: { type: "text", name: "title" },
+          domProps: { value: _vm.postTitle },
           on: {
-            change: function ($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function (o) {
-                  return o.selected
-                })
-                .map(function (o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.postCategory = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.postTitle = $event.target.value
             },
           },
-        },
-        _vm._l(_vm.allCategories, function (category, i) {
-          return _c("option", { domProps: { value: category.id } }, [
-            _vm._v(_vm._s(category.name)),
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "author" } }, [_vm._v("Autore")]),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.postAuthor,
+              expression: "postAuthor",
+            },
+          ],
+          attrs: { type: "text", name: "author" },
+          domProps: { value: _vm.postAuthor },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.postAuthor = $event.target.value
+            },
+          },
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.postContent,
+              expression: "postContent",
+            },
+          ],
+          attrs: { name: "content", cols: "30", rows: "10" },
+          domProps: { value: _vm.postContent },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.postContent = $event.target.value
+            },
+          },
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "category" } }, [_vm._v("Category")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.postCategory,
+                expression: "postCategory",
+              },
+            ],
+            attrs: { name: "category" },
+            on: {
+              change: function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.postCategory = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+            },
+          },
+          _vm._l(_vm.allCategories, function (category, i) {
+            return _c("option", { domProps: { value: category.id } }, [
+              _vm._v(_vm._s(category.name)),
+            ])
+          }),
+          0
+        ),
+        _c("br"),
+        _vm._v(" "),
+        _vm._l(_vm.allTags, function (tag, i) {
+          return _c("div", [
+            _c("label", { attrs: { for: tag.name } }, [
+              _vm._v(_vm._s(tag.name)),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.postTags,
+                  expression: "postTags",
+                },
+              ],
+              attrs: { type: "checkbox", name: "tags" },
+              domProps: {
+                value: tag.id,
+                checked: Array.isArray(_vm.postTags)
+                  ? _vm._i(_vm.postTags, tag.id) > -1
+                  : _vm.postTags,
+              },
+              on: {
+                change: function ($event) {
+                  var $$a = _vm.postTags,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = tag.id,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.postTags = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.postTags = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.postTags = $$c
+                  }
+                },
+              },
+            }),
           ])
         }),
-        0
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "release_date" } }, [
-        _vm._v("Data di rilascio"),
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postReleaseDate,
-            expression: "postReleaseDate",
+        _vm._v(" "),
+        _c("label", { attrs: { for: "release_date" } }, [
+          _vm._v("Data di rilascio"),
+        ]),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.postReleaseDate,
+              expression: "postReleaseDate",
+            },
+          ],
+          attrs: { type: "date", name: "release_date" },
+          domProps: { value: _vm.postReleaseDate },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.postReleaseDate = $event.target.value
+            },
           },
-        ],
-        attrs: { type: "date", name: "release_date" },
-        domProps: { value: _vm.postReleaseDate },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.postReleaseDate = $event.target.value
+        }),
+        _c("br"),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "rating" } }, [_vm._v("Rating")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.postRating,
+              expression: "postRating",
+            },
+          ],
+          attrs: { type: "number", name: "rating", min: "1", max: "5" },
+          domProps: { value: _vm.postRating },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.postRating = $event.target.value
+            },
           },
-        },
-      }),
-      _c("br"),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "rating" } }, [_vm._v("Rating")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postRating,
-            expression: "postRating",
+        }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "button", value: "Submit" },
+          on: {
+            click: function ($event) {
+              return _vm.updatePost()
+            },
           },
-        ],
-        attrs: { type: "number", name: "rating", min: "1", max: "5" },
-        domProps: { value: _vm.postRating },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.postRating = $event.target.value
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "button", value: "Submit" },
-        on: {
-          click: function ($event) {
-            return _vm.updatePost()
-          },
-        },
-      }),
-    ]),
+        }),
+      ],
+      2
+    ),
   ])
 }
 var staticRenderFns = []

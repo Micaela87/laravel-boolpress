@@ -93,6 +93,10 @@ class ApiController extends Controller
 
         $updatedtPost -> save();
 
+        $tags = Tags::findOrFail($request['tags']);
+
+        $updatedtPost -> tags() -> attach($tags);
+
         $updatedtPost -> update($data);
 
         return response('ok', 200);

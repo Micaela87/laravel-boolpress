@@ -11,6 +11,10 @@
             <select name="category" v-model="postCategory">
                 <option v-for="(category, i) in allCategories" :value="category.id">{{ category.name }}</option>
             </select><br>
+            <div v-for="(tag, i) in allTags">
+                <label :for="tag.name">{{ tag.name }}</label>
+                <input type="checkbox" :value="tag.id" v-model="postTags" name="tags">
+            </div>
             <label for="release_date">Data di rilascio</label><br>
             <input type="date" name="release_date" v-model="postReleaseDate"><br>
             <label for="rating">Rating</label>
@@ -28,7 +32,9 @@
             return {
                 singlePost: {},
                 urlToPost: 'http://localhost:8000/api/posts/' + this.$route.params.id + '/update',
-                allCategories: []
+                allCategories: [],
+                allTags: [],
+                checkedTags: []
             }
         },
         created() {
@@ -112,12 +118,27 @@
 
                     return this.singlePost.category_id;
                 }
+            },
+            postTags: {
+                get() {
+                    return this.checkedTags;
+                },
+                set(value) {
+                    if (value) {
+                        this.checkedTags = value;
+                        return this.checkedTags;
+                    }
+
+                    return this.checkedTags;
+                }
             }
         },
         methods: {
             showDetails: async function() {
                 this.singlePost = await getDetails(this.$route.params.id);
                 this.getAllCategories();
+                this.getAllTags();
+                this.getPostTags();
             },
             getAllCategories: async function() {
 
@@ -135,6 +156,37 @@
                     console.log(err);
                 }
             },
+            getAllTags: async function() {
+
+                try {
+
+                    let response = await fetch('http://localhost:8000/api/tags');
+
+                    if (response.ok) {
+                        let responseToJson = await response.json();
+
+                        this.allTags = responseToJson.data;
+                    }
+
+                } catch(err) {
+                    console.log(err);
+                }
+            },
+            getPostTags: async function() {
+                try {
+
+                    let response = await fetch('http://localhost:8000/api/posts/' + this.$route.params.id + '/tags');
+
+                    if (response.ok) {
+                        let responseToJson = await response.json();
+
+                        this.checkedTags = responseToJson.data.map( x => x.id);
+                    }
+
+                } catch(err) {
+                    console.log(err);
+                }
+            },
             updatePost: async function() {
 
                 let data = JSON.stringify({
@@ -143,7 +195,8 @@
                     content: this.postContent,
                     release_date: this.postReleaseDate,
                     rating: this.postRating,
-                    category_id: this.postCategory
+                    category_id: this.postCategory,
+                    tags: this.checkedTags
                 });
 
                 try {
