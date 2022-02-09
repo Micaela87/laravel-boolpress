@@ -23,7 +23,7 @@
         data() {
             return {
                 singlePost: {},
-                urlToPost: "http://localhost:8000/api/posts/update/" + this.$route.params.id,
+                urlToPost: 'http://localhost:8000/api/posts/' + this.$route.params.id + '/update',
             }
         },
         created() {

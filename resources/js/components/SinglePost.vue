@@ -41,7 +41,7 @@
                 try {
 
                     let responseCategory = await fetch('http://localhost:8000/api/categories/' + this.singlePost.category_id);
-                    let responseTags = await fetch('http://localhost:8000/api/tags/' + this.singlePost.id);
+                    let responseTags = await fetch('http://localhost:8000/api/posts/' + this.singlePost.id + '/tags');
 
                     if (responseCategory.ok) {
 
@@ -56,6 +56,7 @@
                         this.postTags = responseToJson.data;
 
                     }
+                    
                 } catch(err) {
                     console.log(err);
                 }

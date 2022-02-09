@@ -43,7 +43,7 @@
             deleteRecord: async function(id) {
                 try {
 
-                    let response = await fetch('http://localhost:8000/api/posts/delete/' + id);
+                    let response = await fetch('http://localhost:8000/api/posts/' + id + '/delete');
                     let responseToJson = await response.json();
                     this.posts = responseToJson.data;
 

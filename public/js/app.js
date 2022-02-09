@@ -2232,7 +2232,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return fetch('http://localhost:8000/api/posts/delete/' + id);
+                return fetch('http://localhost:8000/api/posts/' + id + '/delete');
 
               case 3:
                 response = _context2.sent;
@@ -2522,7 +2522,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       singlePost: {},
-      urlToPost: "http://localhost:8000/api/posts/update/" + this.$route.params.id
+      urlToPost: 'http://localhost:8000/api/posts/' + this.$route.params.id + '/update'
     };
   },
   created: function created() {
@@ -2754,7 +2754,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 responseCategory = _context.sent;
                 _context.next = 9;
-                return fetch('http://localhost:8000/api/tags/' + this.singlePost.id);
+                return fetch('http://localhost:8000/api/posts/' + this.singlePost.id + '/tags');
 
               case 9:
                 responseTags = _context.sent;

@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@home')->where('any', '.*')->name('home');
+Route::get('/{any}', 'HomeController@home')->where('any', '.*')->name('home');
 
-Route::middleware('auth')->group(function() {
-    Route::get('/{any}', 'HomeController@home')->where('any', '.*')->name('home');
-});
+// Route::middleware('auth')->group(function() {
+//     Route::get('/{any}', 'HomeController@home')->where('any', '.*')->name('home');
+// });
 
 // Auth::routes();
