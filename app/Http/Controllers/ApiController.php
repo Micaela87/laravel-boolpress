@@ -26,6 +26,10 @@ class ApiController extends Controller
 
         $postToDelete = Posts::findOrFail($id);
 
+        $postToDelete -> tags() -> sync([]);
+
+        $postToDelete -> save();
+
         $postToDelete -> delete();
 
         return response()->json(['data' => Posts::all()]);
