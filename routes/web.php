@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', 'HomeController@home')->where('any', '.*')->name('home');
+Route::get('/', 'Web\HomeController@home')->name('home');
+
+Route::get('/{any}', 'Web\HomeController@home')->where('any', '.*')->middleware('auth');
 
 // Route::middleware('auth')->group(function() {
 //     Route::get('/{any}', 'HomeController@home')->where('any', '.*')->name('home');

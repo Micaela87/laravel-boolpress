@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\Posts;
@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
+    public function getUser() {
+        return Auth::guard('api')->user();
+    }
 
     public function getAllPosts() {
         $allPosts = Posts::all();

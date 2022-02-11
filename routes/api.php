@@ -14,34 +14,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 // authentication routes
+
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::post('/logout', 'Auth\LoginController@logout');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
-// posts routes
-Route::get('/posts', 'ApiController@getAllPosts');
+// public routes
+    // posts routes
 
-Route::get('/posts/{id}/delete', 'ApiController@deletePost');
+Route::get('/posts', 'Api\PostsController@getAllPosts');
 
-Route::get('/posts/{id}', 'ApiController@getSinglePost');
+    // categories routes
+Route::get('/categories', 'Api\CategoriesController@getAllCategories');
 
-Route::post('/posts/store', 'ApiController@storeNewPost');
+Route::get('/categories/{id}', 'Api\CategoriesController@getPostCategory');
 
-Route::post('/posts/{id}/update', 'ApiController@updatePost');
+    // tags routes
+Route::get('/tags', 'Api\TagsController@getAllTags');
 
-// categories routes
-Route::get('/categories', 'ApiController@getAllCategories');
+Route::get('/posts/{id}/tags', 'Api\TagsController@getTagsPerPost');
 
-Route::get('/categories/{id}', 'ApiController@getPostCategory');
+// private routes
+    // posts routes
 
-// tags routes
-Route::get('/tags', 'ApiController@getAllTags');
+Route::get('/posts/{id}/delete', 'Api\PostsController@deletePost')->middleware('auth');
 
-Route::get('/posts/{id}/tags', 'ApiController@getTagsPerPost');
+Route::get('/posts/{id}', 'Api\PostsController@getSinglePost')->middleware('auth');
+
+Route::post('/posts/store', 'Api\PostsController@storeNewPost')->middleware('auth');
+
+Route::post('/posts/{id}/update', 'Api\PostsController@updatePost')->middleware('auth');
+
