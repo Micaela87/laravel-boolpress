@@ -17,9 +17,9 @@ class NewMail extends Mailable
      * @return void
      */
      
-    public function __construct()
+    public function __construct($data)
     {
-
+        $this->data = $data;
     }
 
     /**
@@ -29,6 +29,6 @@ class NewMail extends Mailable
      */
     public function build()
     {
-        return $this->from('mia-mail@mail.com')->view('mail');
+        return $this->from('mia-mail@mail.com')->view('mail')->with(['data' => $this->data]);
     }
 }

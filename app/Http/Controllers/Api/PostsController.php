@@ -40,7 +40,7 @@ class PostsController extends Controller
 
         $postToDelete -> delete();
 
-        Mail::to($user)->send(new NewMail);
+        Mail::to($user)->send(new NewMail($postToDelete));
 
         return response()->json(['data' => Posts::all()]);
     }
