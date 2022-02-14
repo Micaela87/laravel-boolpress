@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 // authentication routes
 
-Route::post('/login', 'Auth\LoginController@login');
+Route::post('/login', 'Api\ApiLoginController@login');
+
 
 Route::post('/logout', 'Auth\LoginController@logout');
 
@@ -40,11 +41,11 @@ Route::get('/posts/{id}/tags', 'Api\TagsController@getTagsPerPost');
 // private routes
     // posts routes
 
-Route::get('/posts/{id}/delete', 'Api\PostsController@deletePost')->middleware('auth');
+Route::get('/posts/{id}/delete', 'Api\PostsController@deletePost');
 
-Route::get('/posts/{id}', 'Api\PostsController@getSinglePost')->middleware('auth');
+Route::get('/posts/{id}', 'Api\PostsController@getSinglePost');
 
-Route::post('/posts/store', 'Api\PostsController@storeNewPost')->middleware('auth');
+Route::post('/posts/store', 'Api\PostsController@storeNewPost');
 
-Route::post('/posts/{id}/update', 'Api\PostsController@updatePost')->middleware('auth');
+Route::post('/posts/{id}/update', 'Api\PostsController@updatePost');
 

@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Models\Categories;
 use App\Models\Tags;
 use Illuminate\Support\Facades\DB;
+use App\Mail\NewMail;
+use Illuminate\Support\Facades\Mail;
 
 // handles requests to posts db table
 
 class PostsController extends Controller
 {
+    
 
     // gets all posts
 
@@ -26,6 +30,8 @@ class PostsController extends Controller
 
     public function deletePost($id) {
 
+        $user = Auth::user();
+
         $postToDelete = Posts::findOrFail($id);
 
         $postToDelete -> tags() -> sync([]);
@@ -33,6 +39,8 @@ class PostsController extends Controller
         $postToDelete -> save();
 
         $postToDelete -> delete();
+
+        Mail::to($user)->send(new NewMail);
 
         return response()->json(['data' => Posts::all()]);
     }

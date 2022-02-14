@@ -55726,10 +55726,7 @@ var routes = [{
 }, {
   path: '/posts',
   component: _components_AllPosts_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-  name: 'posts' // meta: {
-  //     requiresAuth: true
-  // }
-
+  name: 'posts'
 }, {
   path: '/posts/:id',
   component: _components_SinglePost_vue__WEBPACK_IMPORTED_MODULE_2__["default"],

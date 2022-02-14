@@ -28,9 +28,6 @@ const routes = [
         path: '/posts',
         component: AllPosts,
         name: 'posts'
-        // meta: {
-        //     requiresAuth: true
-        // }
     },
     {
         path: '/posts/:id',
